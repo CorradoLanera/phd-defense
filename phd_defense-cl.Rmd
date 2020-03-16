@@ -1,0 +1,50 @@
+---
+title: "Development and Application of Machine Learning Techniques for Text Analyses and Classification in Clinical Research"
+subtitle: '**Ph.D. course in: Traslational Specialistic Medicine "G.B. Morgagni"**'
+author: "_Corrado Lanera_"
+institute: "Department of Cardiac, Thoracic, Vascular Sciences, and Public Health<br>University of Padova"
+date: "2020/03/17"
+output:
+  xaringan::moon_reader:
+    seal: false
+    lib_dir: libs
+    self_contained: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: center, top, and title-slide
+background-image: url("images/bg.png")
+background-position: top
+background-size: contain
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+# Development and Application of<br>Machine Learning Techniques for<br>Analyses and Classification of Free-Text<br>in Clinical Research
+
+**Corrado Lanera**
+
+.left[
+<br>
+<br>
+**Ph.D. course in:** Traslational Specialistic Medicine "G.B. Morgagni<br>
+**Curriculum:** Biostatistics<br>
+<br>
+2020/03/17<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+Department of Cardiac, Thoracic, Vascular Sciences, and Public Health<br>
+University of Padova
+]
+
+???
+
+Good moarning.

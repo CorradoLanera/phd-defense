@@ -7,4 +7,4 @@
 
 <!-- badges: end -->
 
-[Presentation](https://corradolanera.github.io/phd-defence/)
+[Presentation](https://corradolanera.github.io/phd-defense/)

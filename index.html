@@ -41,8 +41,7 @@ University of Padova
 
 ???
 
-Good moarning.
-
+Buongiornop
 
 
 
@@ -75,9 +74,9 @@ class: inverse, middle
 
   - **Systematic Reviews**: _from `PubMed` to `ClinicalTrials.gov`_
   
-  - **Emergency Departments**: _classification of discharge diagnoses_
+  - **Emergency Departments' Visits**: _classification of discharge diagnoses_
   
-  - **Infectious Diseases**:
+  - **Electronic Health Records**:
     
       - _Case-detection of Varicella-Zoster Virus infections_
    
@@ -87,7 +86,7 @@ class: inverse, middle
 
 ???
 
-
+What we will talk about...
 
 
 
@@ -111,9 +110,32 @@ class: center, middle, inverse
 # Motivation
 
 ---
-class: middle
+class: center
+background-image: url("images/clinical-texts.png")
+background-position: bottom
+background-size: contain
 
-foo
+.pull-left[
+### Documents' content
+]
+&lt;!-- - Guidelines --&gt;
+&lt;!-- - Research papers --&gt;
+&lt;!-- - Trials' protocols --&gt;
+
+.pull-right[
+### Clinical records
+]
+&lt;!-- - Discharge notes --&gt;
+&lt;!-- - Clinical reports --&gt;
+&lt;!-- - Family doctors' diaries --&gt;
+
+### Social-Media
+
+&lt;!-- - General illness --&gt;
+&lt;!-- - Adverse reactions --&gt;
+&lt;!-- - Drugs (ab)use --&gt;
+
+
 
 ???
 
@@ -140,16 +162,143 @@ bar
 
 ---
 class: center, middle, inverse
-# Background 1
+# Background 1: Machine Learning
 
 ---
-class: middle
+class: middle, center
 
-foo
+&lt;img src="images/ml-paradigm.png", align = "center"&gt;
+
+Arthur Samuel (1959). **Machine Learning: Field of study that gives computers the ability to learn without being explicitly programmed.**
 
 ???
 
 bar
+
+
+
+
+
+
+
+
+
+
+---
+class: middle, center
+
+# (Shallow) Model definition
+.pull-left[
+Logistic regression 
+&lt;img src="images/Exam_pass_logistic_curve.jpeg", width = 65%,  align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://commons.wikimedia.org/wiki/File:Exam_pass_logistic_curve.jpeg&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+k-nearest neighbor
+&lt;img src="images/KnnClassification.svg.png", width = 50%,  align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://it.m.wikipedia.org/wiki/File:KnnClassification.svg&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+]
+
+
+.pull-right[
+support-vector machine
+&lt;img src="images/Kernel_Machine.png",  align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://commons.wikimedia.org/wiki/File:Kernel_Machine.png&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+random forest (decision tree)
+&lt;img src="images/1_e18v-2-EabQTp_Bj92fkYA.png", width = 100%, align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://towardsdatascience.com/random-forests-and-decision-trees-from-scratch-in-python-3e4fa5ae4249&gt;
+]
+
+
+
+
+
+
+
+
+
+
+---
+class: center, middle
+
+# (Artificial) Neuron
+
+&lt;img src="images/neuron.gif", width = 90%, align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+.right[&lt;https://www.cs.iusb.edu/~danav/teach/c463/12_nn.html&gt;]
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+&lt;br&gt;
+&lt;big&gt;
+&lt;big&gt;
+&lt;big&gt;
+&lt;big&gt;
+`\(=g(\sum(w_ia_i))\)`
+
+
+
+
+
+
+
+
+
+
+---
+class: center, middle
+
+# Fully connect
+&lt;img src="images/fc.png", width = 70%, align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Artificial_neural_network.svg/860px-Artificial_neural_network.svg.png&gt;
+
+
+
+
+
+
+
+
+
+
+---
+class: top
+
+# .center[Learning]
+
+.center[Tom Mitchell (1998). **Well-posed Learning Problem: A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.**]
+
+&lt;img src="images/deep_gradient.png", align = "center"&gt;
+
+.pull-left[
+1. Random initialization
+1. Forward propagation
+1. Loss evaluation
+1. Back propagation
+1. Optimization and update
+]
+
+
+.pull-right[
+&lt;img src="images/Gradient_descent.gif", align = "center"&gt;
+]
+&lt;small&gt;&lt;small&gt;&lt;small&gt;.right[
+&lt;https://upload.wikimedia.org/wikipedia/commons/a/a3/Gradient_descent.gif&gt;
+]
 
 
 
@@ -174,10 +323,42 @@ bar
 class: center, middle, inverse
 # Background 2
 
----
-class: middle
 
-foo
+---
+class: center
+
+.pull-left[
+# Search string
+
+One or several strings (also called patterns) founded within a larger string or text.
+
+&lt;img src="images/MeSH-example.svg.png", width = 70%,  align = "center"&gt;
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/MeSH-example.svg/1024px-MeSH-example.svg.png&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+&lt;img src="images/Boolean_operations_on_shapes_a.png", width = 40%,  align = "center"&gt;
+&lt;img src="images/Boolean_operations_on_shapes_b.png", width = 40%,  align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://it.wikipedia.org/wiki/File:Boolean_operations_on_shapes.png&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+]
+
+
+
+.pull-right[
+# Regular expressions
+
+A sequence of characters that define a search pattern
+
+&lt;img src="images/crossword_regex.png",  align = "center"&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://www.flickr.com/photos/bluesmoon/8458343489/in/photostream/&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+]
 
 ???
 
@@ -185,6 +366,23 @@ bar
 
 
 
+---
+class: middle
+
+# Preprocessing
+
+- **removing** (removes noise):
+  - remove non-word text
+  - remove stopwords
+  - strip whitespace
+
+- **merging** (reduces the risk to allow important information to become noise because they are dispersed):
+  - lowering
+  - stemming
+  - lemmatization
+
+- **producing** (from words to “tokens”, i.e. single indivisible piece of information to bring information which could be lost otherwise, e.g. negations):
+  - n-Grams (consecutive sequences of n words)
 
 
 
@@ -193,6 +391,115 @@ bar
 
 
 
+
+
+---
+class: middle
+
+# Sparse representation
+
+&lt;img src="images/1_zFzLwr9kMiuT5FH9TPwd-Q.png", width = 80%  align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://towardsdatascience.com/word-embedding-with-word2vec-and-fasttext-a209c1d3e12c&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+
+
+
+
+
+
+
+
+---
+class: middle
+
+&lt;img src="images/download.png",  align = "center"&gt;
+
+
+
+
+
+
+
+
+
+
+---
+class: center, middle
+
+&lt;img src="images/skip-gram.png", width = 70%, align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+.right[&lt;https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/&gt;]
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+
+
+
+
+
+
+
+
+---
+class: center, middle
+
+&lt;img src="images/fasttext-example.png", align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+.right[&lt;https://www.tensorflow.org/images/linear-relationships.png&gt;]
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+class: middle, inverse
+
+# .cener[Contributions]
+
+&lt;small&gt;
+Lanera, C., Minto, C., Sharma, A., Gregori, D., Berchialla, P., &amp; baldi, I. (2018). **Extending PubMed Searches to ClinicalTrials.gov Through a Machine Learning Approach for Systematic Reviews**.&lt;br&gt;
+_Journal of Clinical Epidemiology._ &lt;small&gt;https://doi.org/10.1016/j.jclinepi.2018.06.015&lt;/small&gt;
+
+
+Lanera, C., Berchialla,  P., Sharma, A., Minto, C., Gregori, D., &amp; Baldi, I. (2019). **Screening PubMed Abstracts: is Class Imbalance Always a Challenge to Machine Learning?**&lt;br&gt;
+_BMC Systematic Reviews._ &lt;small&gt;https://doi.org/10.1186/s13643-019-1245-8&lt;/small&gt;
+
+
+Lorenzoni, G., Bressan, S., Lanera, C., Azzolina, D., Da Dalt, L., &amp; Gregori, D. (2019). **Analysis of Unstructured Text-Based Data Using Machine Learning Techniques: The Case of Pediatric Emergency Department Records in Nicaragua.**&lt;br&gt;
+_Medical Care Research and Review._ &lt;small&gt;https://doi.org/10.1177/1077558719844123&lt;/small&gt;
+
+
+Lanera, C., Berchialla, P., Baldi, I., Lorenzoni, G., Tramontan, L., Scamarcia, A., Cantarutti, L., Giaquinto, C., &amp; Gre-gori, D. (2019). **Use of Machine Learning techniques for case-detection of Varicella Zoster using routinely collected textual ambulatory records.**&lt;br&gt;
+_Journal of Medical Internet Research._ &lt;small&gt;https://www.ncbi.nlm.nih.gov/pubmed/management/validator/93DC7C7BE977/citations/&lt;/small&gt;
+
+
+Lanera, C., Barbieri, E., Piras, G., Maggie, A., Weissenbacher, D., Doná, D., Scamarcia, A., Cantarutti, L, Gonzalez, G., Giacquinto, C., &amp;  Gregori, D. (2020). **Automatic identification and classification of different types of otitis from free-text pediatric medical notes: a deep-learning approach.**
+(Preprint)
+&lt;/small&gt;
+
+
+???
+
+bar
 
 
 
@@ -204,11 +511,169 @@ bar
 
 ---
 class: center, middle, inverse
-# Contributions
+# Systematic Reviews
+
+**Extending PubMed Searches to ClinicalTrials.gov Through a Machine Learning Approach for Systematic Reviews**
+
+**Screening PubMed Abstracts: is Class Imbalance Always a Challenge to Machine Learning?**
+
 
 ---
 
-## Overview
+## Motivation
+
+- Searching not only through standard databases leads to
+  - Increase of patients from 10% to 50%
+  - Change in statistics from 0% to 29%
+
+&lt;img src="images/BMJ17.PNG", width = 80%,  align = "right"&gt;
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+- Despite their relevant role, clinical trial registries are under-utilized
+  - No hierarchical branching structure
+  - Text search is based on few fields
+  - Cannot use queries’ combination
+
+&lt;img src="images/UnderUse17.PNG", width = 80%,  align = "right"&gt;
+
+
+
+
+
+
+
+
+
+---
+
+## Methods
+
+14 Systematic reviews and Meta-analyses re-analyzed by 
+Baudard et al.*
+
+- Training (PubMED):
+ - Positive : trials originally included in the systematic reviews
+ - Negative: off topic trials randomly choosed (1/20)
+- Test (ClinicalTrial.gov):
+ - Positive : trials by Baudard et al. study
+ - Negative: off topic trials randomly choosed (up to a set of 100)
+
+&lt;img src="images/selection.PNG", width = "55%"  align = "right"&gt;
+
+
+- MLT (10-fold Cross-Validation):
+ - GLM Net
+ - k-NN
+ - Random Forests
+ - **Support-Vector Machine**
+
+
+- Balanceing methods:
+ - Random Under-sampling
+ - Random Over-sampling
+ - 50:50
+ - **35:65**
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;Baudard M, Yavchitz A, Ravaud P, et al. **Impact of searching clinical trial registries in systematic reviews of pharmaceutical treatments: methodological systematic review and reanalysis of meta-analyses.** _BMJ_ (2017).&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+
+
+???
+Routine examination of registry databases deserves further
+consideration since it may allow a more characterization of
+publication and outcome reporting biases and improve the
+validity of Systematic Reviews
+The approach described here provides an automated solution
+that can be tailored to address a variety of Clinical Trial-related
+questions by building a comprehensive search on both literature
+and registry databases.
+
+---
+class: center
+
+&lt;img src="images/Flowchart.jpg", width = "75%"&gt;
+
+
+---
+class: center
+
+#### SVM performances
+
+ID | review       | manual |   mlt | delta     |   pos |  sens
+--:| -------------|-------:|------:|----------:|------:|:------:
+ 1 | Yang Q       |     12 |   457 |    -445   |    18 |  1    
+ 2 | Meng Y       |     26 |   144 |    -118   |     9 |  1    
+ 3 | Segelov E    |    684 |   274 |     410   |    13 |  **0.875**
+ 4 | Li DH        |    201 |   289 |     -88   |     6 |  1    
+ 5 | Lv ZC        |    665 |   243 |     422   |    12 |  1    
+ 6 | Wang J       |    227 |   729 |    -502   |    32 |  1    
+ 7 | Zhou CQ      |      3 |   263 |    -260   |     9 |  1    
+ 8 | Liu X        |   1661 |   622 |  **1039** |    23 |  1    
+ 9 | Douxfils J   |     76 |   116 |     -40   |    13 |  1    
+10 | Kourbeti IS  |    581 |   409 |     172   |    75 |  1    
+11 | Li EC        |    909 |  2119 | **-1210** |     9 |  1    
+12 | Cavender MA  |     71 |    60 |      11   |    14 |  1    
+13 | Chatterjee S |    217 |   169 |      48   |    18 |  1    
+14 | Funakoshi T  |   2680 |   711 |  **1969** |    43 |  1    
+
+
+
+
+
+
+---
+class: center, middle
+
+&lt;img src="images/rf-meta.jpg"&gt;
+
+
+
+
+---
+class: center, middle, inverse
+# Emergency Departments Visits
+
+**Analysis of Unstructured Text-Based Data Using Machine Learning Techniques: The Case of Pediatric Emergency Department Records in Nicaragua.**
+---
+
+## Motivation
+
+
+&lt;img src = "images/ambulance.png"&gt;
+
+- Multi-source Multi-format Clinical Data
+
+- Small dataset
+
+
+???
+
+ITALY-NICARAGUA COOPERATION PROGRAM
+
+Started in 2011 
+Italian and Nicaraguan pediatricians
+
+AIMS
+- Setting up a pediatric emergency clinical network in Nicaragua
+- Improving Nicaraguan pediatric Emergency Care
+
+DATA COLLECTION
+established an electronic data collection system
+9 Nicaraguan hospitals
+
+
+
+---
+class: center, middle
+
+&lt;img src = "images/nicaragua.png"&gt;
 
 ???
 
@@ -221,32 +686,15 @@ bar
 
 
 
-
-
 ---
+class: center, middle, inverse
+# Electronic Health Records
 
-## Systematic Reviews
+**Use of Machine Learning techniques for case-detection of Varicella Zoster using routinely collected textual ambulatory records.**
 
-???
-
-bar
-
-
+**Automatic identification and classification of different types of otitis from free-text pediatric medical notes: a deep-learning approach.**
 
 
-
-
-
-
-
-
----
-
-## Emergency Departments
-
-???
-
-bar
 
 
 
@@ -259,15 +707,135 @@ bar
 
 ---
 
-## Infectious Diseases
+&lt;img src="images/barbieri2019.png", width = "32%", align = "right"&gt;
+
+&lt;big&gt;&lt;big&gt;
+
+2019 &lt;img src="images/logopedianet.png", width = "20%", align = "center"&gt; investigation
+
+- data from 2010 to 2015 
+
+- **on primary diagnosis only**
+
+Adding even the diaries in a traditional manual human-driven analysis proved to be 
+**too costly** in terms both of person-time and economic resources
+
+
+It is necessary to develop an **accurate** system able to classify all
+the &lt;img src="images/logopedianet.png", width = "15%", align = "center"&gt; records **automatically** investigating **all the textual
+fields** in the database.
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;\*Barbieri et.al "Antibiotic prescriptions in acute otitis media and pharyngitis in Italian pediatric outpatients", **Italian J. of Pediatrics** 2019&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+???
+
+- Otitis media is one of the **most common infections in pediatrics**
+  population.
+
+- It is an **inflamamtion with possible fluid accumulation** in the
+  middle ear
+
+- and there is continuing interest in defining the incidence and the
+  burden of acute cases, being one of the main cause of antibiotics
+  prescriptions in children.
+  
+- This is also highlighted by the **chellenges in the diagnoses** and by 
+the **frequently little attention in following the guidlines**, like the
+**wait-and-see approach** that discourage early antibiotics prescription,
+reducing their usage and the adverse events associated with that.
+
+Pedianet was investigated in 2019 by Barbieri et.al\* on data from 
+2010 to 2015 for similar task **on primary diagnosis only**: adding even
+the diaries in a traditional manual human-driven analysis proved to be 
+too costly in terms both of person-time (years) and economic resources
+
+It is necessary to develop an **accurate** system able to classify all
+the Pedianet records **automatically** investigating **all the textual
+fields** in the database.
+
+
+
+---
+
+## First Study on &lt;img src="images/logopedianet.png", width = "30%", align = "center"&gt; 
+
+Aim: **comparing Machine Learning Techniques with application to Electronic Healt Records analysis for disease detection.**
+
+Two distinct Italian regions’ &lt;img src="images/logopedianet.png", width = "20%", align = "center"&gt; dataset collected between 2004 and 2014 in:
+&lt;img src = "images/varicella-1_diagram.png",  width = "38%", align = "right"&gt;
+
+- Veneto (training):
+  - 7,631 patients 1,230,355 records
+- Sicilia (test):
+  - 2,347 patients and 569,926 records
+  
+
+- Records included dichotomous labels:
+  - **non-case**
+  - **case**
+
+
+Technique	|     Accuracy	    |         F
+----------|-------------------|-----------------
+GLMNet  	| 86.6 (84.6–88.7)	| 36.5 (32.2–40.8)
+MAXENT	  | 66.0 (56.4–75.5)	| 19.1 (17.2–20.9)
+Boosting	| 96.0 (93.8–98.1)	| 68.5 (59.3–77.7)
+
 
 ???
 
 bar
 
+---
+class: middle
+
+&lt;img src="images/flowchart_otiti.png", width = "52%", align = "right"&gt;
+
+#### Data
+
+2004/01/01 to 2017/08/23
+- 144 pediatricians
+- 216,976 children
 
 
+#### Classification task
 
+&lt;ol start="0"&gt;
+&lt;li&gt;&lt;strong&gt;other&lt;/strong&gt; than an otitis case&lt;/li&gt;&lt;br&gt;
+&lt;li&gt;an otitis case which is &lt;strong&gt;not media&lt;/strong&gt;&lt;/li&gt;&lt;br&gt;
+&lt;li&gt;a media otitis which is &lt;strong&gt;not acute&lt;/strong&gt;&lt;/li&gt;&lt;br&gt;
+&lt;li&gt;&lt;img src="images/aom.jpg", width = "10%", align = "left"&gt;
+  an AOM (&lt;strong&gt;w/o&lt;/strong&gt; tympanic membrane perforation, nor recurrent)&lt;/li&gt;&lt;br&gt;
+  
+&lt;li&gt;&lt;img src="images/aom_perforation.jpg", width = "10%", align = "left"&gt;
+  an AOM with tympanic &lt;strong&gt;membrane perforation&lt;/strong&gt;&lt;/li&gt;&lt;br&gt;&lt;br&gt;
+&lt;li&gt;a &lt;strong&gt;recurrent&lt;/strong&gt; AOM&lt;/li&gt;
+&lt;/ol&gt;
+
+
+.pull-right[
+.footnote[&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;http://otitismedia.hawkelibrary.com&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;]
+]
+
+---
+class: center, middle
+
+Network                            |  Accuracy | Balanced&lt;br&gt;F1
+-----------------------------------|  :------: | :------------:
+**Annotator A**                    |   95.91   |      93.47 
+**Annotator B**                    |   95.80   |      90.12 
+**(Annotators' average)**          |  (95.86)  |     (91.80)
+Simple Embedding                   |   81.70   |      75.75
+Single Kernel                      |   94.66   |      92.23
+Sequential CNN                     |   93.64   |      87.99
+Parallel CNN                       | **96.59** |    **95.86**
+Deep CNN                           | **96.25** |    **94.85**
+Ensemble&lt;br&gt;(w/o Simple Embeddings)| **96.59** |    **95.47**
+
+.pull-right[
+  \* **Bold face** = over the annotators' maximum &lt;br&gt;
+]
 
 
 
@@ -291,7 +859,7 @@ class: center, middle, inverse
 ---
 class: middle
 
-foo
+&lt;img src="images/3mt.png", align = "center"&gt;
 
 ???
 
@@ -324,15 +892,27 @@ class: center, middle, inverse
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
+
+# **Thank you&lt;br&gt;for the attention**
+
 &lt;br&gt;
-
-# **Thank you&lt;br&gt;for the attention**&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
 
 &lt;small&gt;&lt;small&gt;&lt;small&gt;Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan) powered by [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+
+
+---
+
+Questa
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

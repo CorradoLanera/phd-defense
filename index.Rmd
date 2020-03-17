@@ -70,7 +70,7 @@ Buongiorno
 class: inverse, middle
 # Outline
 
-1. **Motivation:** _Why be interested in Free-Text analysis for clinical research?_
+1. **Motivation:** _How can Free-Text analysis improve (help) clinical research?_
 
 1. **Background 1:** _Machine Learning_
 
@@ -498,7 +498,7 @@ Lanera, C., Berchialla, P., Baldi, I., Lorenzoni, G., Tramontan, L., Scamarcia, 
 _Journal of Medical Internet Research._ <small>https://www.ncbi.nlm.nih.gov/pubmed/management/validator/93DC7C7BE977/citations/</small>
 
 
-Lanera, C., Barbieri, E., Piras, G., Maggie, A., Weissenbacher, D., Doná, D., Scamarcia, A., Cantarutti, L, Gonzalez, G., Giacquinto, C., &  Gregori, D. (2020). **Automatic identification and classification of different types of otitis from free-text pediatric medical notes: a deep-learning approach.**
+Lanera, C., Barbieri, E., Piras, G., Lorenzoni, G., Maggie, A., Weissenbacher, D., Doná, D., Scamarcia, A., Cantarutti, L, Gonzalez, G., Giacquinto, C., &  Gregori, D. (2020). **Automatic identification and classification of different types of otitis from free-text pediatric medical notes: a deep-learning approach.**
 (Preprint)
 </small>
 
@@ -565,7 +565,7 @@ Baudard et al.*
 
 - Training (PubMED):
  - Positive : trials originally included in the systematic reviews
- - Negative: off topic trials randomly choosed (1/20)
+ - Negative: off topic trials randomly choosen (1/20)
 - Test (ClinicalTrial.gov):
  - Positive : trials by Baudard et al. study
  - Negative: off topic trials randomly choosed (up to a set of 100)
@@ -580,7 +580,7 @@ Baudard et al.*
  - **Support-Vector Machine**
 
 
-- Balanceing methods:
+- Balancing methods:
  - Random Under-sampling
  - Random Over-sampling
  - 50:50
@@ -723,13 +723,12 @@ class: center, middle, inverse
 
 - **on primary diagnosis only**
 
-Adding even the diaries in a traditional manual human-driven analysis proved to be 
+Adding the diaries in a traditional manual human-driven analysis proved to be 
 **too costly** in terms both of person-time and economic resources
 
 
-It is necessary to develop an **accurate** system able to classify all
-the <img src="images/logopedianet.png", width = "15%", align = "center"> records **automatically** investigating **all the textual
-fields** in the database.
+It is necessary to develop an **accurate** system able to **automatically**
+classify all the <img src="images/logopedianet.png", width = "15%", align = "center"> records by investigating **all the textual fields** in the database.
 
 <small><small><small><small><small><small>\*Barbieri et.al "Antibiotic prescriptions in acute otitis media and pharyngitis in Italian pediatric outpatients", **Italian J. of Pediatrics** 2019</small></small></small></small></small></small>
 

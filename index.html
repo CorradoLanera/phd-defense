@@ -41,7 +41,12 @@ University of Padova
 
 ???
 
-Buongiorno
+Buongiorno a tutti e grazie per essere qui per la discusisone della mia
+tesi di dottorato. Il tema trattato è quello dello sviluppo e dell'
+applicazione di tecniche di auto apprendimento per l'analisi e la 
+classificazione del testo in linguaggio naturale in ambito clinico.
+
+
 
 
 
@@ -66,9 +71,9 @@ class: inverse, middle
 
 1. **Motivation:** _How can Free-Text analysis improve (help) clinical research?_
 
-1. **Background 1:** _Machine Learning_
+1. **Background 1:** _Natural Language Processing and Text Mining_
 
-1. **Background 2:** _Natural Language Processing and Text Mining_
+1. **Background 2:** _Machine Learning_
 
 1. **Contributions:**
 
@@ -86,7 +91,21 @@ class: inverse, middle
 
 ???
 
-What we will talk about...
+Comincerò dando alcune motivazioni e considerazioni che mi hanno spinto
+e tuttora muovono i mie interessi in queste direzioni.
+
+Dopodiché farò due brevi introduzioni per mostrare e fissare gli
+strumenti che ho studiato e sfruttato nel corso di questi tre anni. 
+Questo sia nel caso delle tecninche di autoapprendimento che quelle 
+di analisi informatica del linguaggio naturale.
+
+Quindi presenterò i lavori a cui ho dato maggiore contributo coi miei
+studi su questi temi in questi tre anni insieme al nostro gruppo di
+lavoro all'unità di biostatistica Epidemiologia e sanità pubblica.
+
+Infine, vedremo quindi di ricapitolare in modo uniforme quanto fatto
+cercando di fornire una panoramica uniforme a posteriori.
+
 
 
 
@@ -109,6 +128,11 @@ What we will talk about...
 class: center, middle, inverse
 # Motivation
 
+???
+
+Iniziamo quindi con le motivazioni
+
+
 ---
 class: center
 background-image: url("images/clinical-texts.png")
@@ -118,28 +142,55 @@ background-size: contain
 .pull-left[
 ### Documents' content
 ]
-&lt;!-- - Guidelines --&gt;
-&lt;!-- - Research papers --&gt;
-&lt;!-- - Trials' protocols --&gt;
 
 .pull-right[
 ### Clinical records
 ]
-&lt;!-- - Discharge notes --&gt;
-&lt;!-- - Clinical reports --&gt;
-&lt;!-- - Family doctors' diaries --&gt;
 
 ### Social-Media
 
-&lt;!-- - General illness --&gt;
-&lt;!-- - Adverse reactions --&gt;
-&lt;!-- - Drugs (ab)use --&gt;
 
 
 
 ???
 
-bar
+La motivazione principale sta nell'aver osservato quanto il testo a 
+linguaggio naturale sia diffuso nella pratica clinica. Medici,
+infermieri, ricercatori e persino pazienti scambiano informnazioni
+cliniche principalmente utilizzando il testo a linguaggio naturale.
+
+Chiaramente ci sono tantissime misure rigorose e strutturate di
+interesse clinico, come possono essere quelle numeriche, come per
+esempio i livelli di emoglobina nel sangue o il peso, quelle categoriali,
+come per esempio il sesso, o la classe NYHA, e così via.
+
+Solo queste ultime però sono solitamente e riescono ad essere analizzate
+in modo programamtico e strutturato, appunto. Tutti quei dati clinici
+non strutturati come le immagini o il testo libero sono invece lasciate
+alla sola ed esclusiva analisi "esperta" degli esseri umani, questo per 
+la loro estrema complessità.
+
+Pensiamo infatti anche solo a tutti gli articoli di ricerca o alle linee
+guida, ai referti ospedalieri, i diari dei medici di base, alle note 
+cliniche, ma anche ai messaggi sui social network delle persone che
+esprimono disagi, possibili effetti avversi, usi e abusi di farmaci
+e così via.
+
+Il testo a linguaggio naturale, sopratutto e ancora, in ambito clinico
+è praticamente esclusiva prerogativa del singolo medico o operatore che
+lo legge.
+
+- Guidelines
+- Research papers
+- Trials' protocols
+
+- Discharge notes
+- Clinical reports
+- Family doctors' diaries
+
+- General illness
+- Adverse reactions
+- Drugs (ab)use
 
 
 
@@ -162,7 +213,162 @@ bar
 
 ---
 class: center, middle, inverse
+# Background 1: Natural Language processing and Text Mining
+
+
+---
+class: center
+
+.pull-left[
+# Search string
+
+One or several strings (also called patterns) founded within a larger string or text.
+
+&lt;img src="images/MeSH-example.svg.png", width = 70%,  align = "center"&gt;
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/MeSH-example.svg/1024px-MeSH-example.svg.png&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+&lt;img src="images/Boolean_operations_on_shapes_a.png", width = 40%,  align = "center"&gt;
+&lt;img src="images/Boolean_operations_on_shapes_b.png", width = 40%,  align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://it.wikipedia.org/wiki/File:Boolean_operations_on_shapes.png&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+]
+
+
+
+.pull-right[
+# Regular expressions
+
+A sequence of characters that define a search pattern
+
+&lt;img src="images/crossword_regex.png",  align = "center"&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://www.flickr.com/photos/bluesmoon/8458343489/in/photostream/&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+]
+
+???
+
+bar
+
+
+
+---
+class: middle
+
+# Preprocessing
+
+- **removing** (removes noise):
+  - remove non-word text
+  - remove stopwords
+  - strip whitespace
+
+- **merging** (reduces the risk to allow important information to become noise because they are dispersed):
+  - lowering
+  - stemming
+  - lemmatization
+
+- **producing** (from words to “tokens”, i.e. single indivisible piece of information to bring information which could be lost otherwise, e.g. negations):
+  - n-Grams (consecutive sequences of n words)
+
+
+
+
+
+
+
+
+
+
+---
+class: middle
+
+# Sparse representation
+
+&lt;img src="images/1_zFzLwr9kMiuT5FH9TPwd-Q.png", width = 80%  align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;
+&lt;https://towardsdatascience.com/word-embedding-with-word2vec-and-fasttext-a209c1d3e12c&gt;
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+
+
+
+
+
+
+
+
+---
+class: middle
+
+&lt;img src="images/download.png",  align = "center"&gt;
+
+
+
+
+
+
+
+
+
+
+---
+class: center, middle
+
+&lt;img src="images/skip-gram.png", width = 70%, align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+.right[&lt;https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/&gt;]
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+
+
+
+
+
+
+
+
+---
+class: center, middle
+
+&lt;img src="images/fasttext-example.png", align = "center"&gt;
+
+&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
+.right[&lt;https://www.tensorflow.org/images/linear-relationships.png&gt;]
+&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+class: center, middle, inverse
 # Background 1: Machine Learning
+
+???
+
+vediamo quindi innanzitutto come un programma 
 
 ---
 class: middle, center
@@ -300,159 +506,6 @@ class: top
 &lt;https://upload.wikimedia.org/wikipedia/commons/a/a3/Gradient_descent.gif&gt;
 ]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-class: center, middle, inverse
-# Background 2: Natural Language processing and Text Mining
-
-
----
-class: center
-
-.pull-left[
-# Search string
-
-One or several strings (also called patterns) founded within a larger string or text.
-
-&lt;img src="images/MeSH-example.svg.png", width = 70%,  align = "center"&gt;
-&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
-&lt;https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/MeSH-example.svg/1024px-MeSH-example.svg.png&gt;
-&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
-
-
-&lt;img src="images/Boolean_operations_on_shapes_a.png", width = 40%,  align = "center"&gt;
-&lt;img src="images/Boolean_operations_on_shapes_b.png", width = 40%,  align = "center"&gt;
-
-&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
-&lt;https://it.wikipedia.org/wiki/File:Boolean_operations_on_shapes.png&gt;
-&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
-]
-
-
-
-.pull-right[
-# Regular expressions
-
-A sequence of characters that define a search pattern
-
-&lt;img src="images/crossword_regex.png",  align = "center"&gt;
-&lt;br&gt;&lt;br&gt;
-&lt;small&gt;&lt;small&gt;&lt;small&gt;
-&lt;https://www.flickr.com/photos/bluesmoon/8458343489/in/photostream/&gt;
-&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
-]
-
-???
-
-bar
-
-
-
----
-class: middle
-
-# Preprocessing
-
-- **removing** (removes noise):
-  - remove non-word text
-  - remove stopwords
-  - strip whitespace
-
-- **merging** (reduces the risk to allow important information to become noise because they are dispersed):
-  - lowering
-  - stemming
-  - lemmatization
-
-- **producing** (from words to “tokens”, i.e. single indivisible piece of information to bring information which could be lost otherwise, e.g. negations):
-  - n-Grams (consecutive sequences of n words)
-
-
-
-
-
-
-
-
-
-
----
-class: middle
-
-# Sparse representation
-
-&lt;img src="images/1_zFzLwr9kMiuT5FH9TPwd-Q.png", width = 80%  align = "center"&gt;
-
-&lt;small&gt;&lt;small&gt;&lt;small&gt;
-&lt;https://towardsdatascience.com/word-embedding-with-word2vec-and-fasttext-a209c1d3e12c&gt;
-&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
-
-
-
-
-
-
-
-
-
-
----
-class: middle
-
-&lt;img src="images/download.png",  align = "center"&gt;
-
-
-
-
-
-
-
-
-
-
----
-class: center, middle
-
-&lt;img src="images/skip-gram.png", width = 70%, align = "center"&gt;
-
-&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
-.right[&lt;https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/&gt;]
-&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
-
-
-
-
-
-
-
-
-
-
----
-class: center, middle
-
-&lt;img src="images/fasttext-example.png", align = "center"&gt;
-
-&lt;small&gt;&lt;small&gt;&lt;small&gt;&lt;small&gt;
-.right[&lt;https://www.tensorflow.org/images/linear-relationships.png&gt;]
-&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;&lt;/small&gt;
 
 
 

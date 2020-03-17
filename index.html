@@ -28,6 +28,7 @@ background-size: contain
 &lt;br&gt;
 **Ph.D. course in:** Traslational Specialistic Medicine "G.B. Morgagni"&lt;br&gt;
 **Curriculum:** Biostatistics&lt;br&gt;
+**Supervisor:** Prof. Dario Gregori&lt;br&gt;
 &lt;br&gt;
 2020/03/17&lt;br&gt;
 &lt;br&gt;
@@ -215,6 +216,11 @@ lo legge.
 class: center, middle, inverse
 # Background 1: Natural Language processing and Text Mining
 
+???
+
+Vediamo quindi innanzitutto come può ed è possibile analizzare 
+il testo in linguaggio naturale per il recupero di informazioni non
+banali da esso.
 
 ---
 class: center
@@ -254,7 +260,26 @@ A sequence of characters that define a search pattern
 
 ???
 
-bar
+La prima e intuitiva forma di ricerca è quella della semplice ricerca
+delle parole nel testo. Questa pratica è stata in vari modi potenziata
+sfruttanto l'utilizzo di parole chiave in vocabolari gerarchici, il 
+cui più famoso forse in ambito medico sono la collezione dei termini 
+MeSH usati dall abiblioteca nazionale di medicina americana per 
+indicizzare tutti i lavori che colleziona.
+
+Da questo è poi possibile usare la logica di insieme per unire,
+intersecare, sottrarre e così via i risultati di singole ricerche.
+
+Dall'altra parte uno strumento potentissimo che è stato sviluppato per 
+il testo è il proto-linguaggio di programmazione delle espressioni
+regolari che non sono altro che delle regole con cui scrivere istruzioni
+per cercare il testo.
+
+La differenza tra i due approcci è fondamentalmente quindi che nel primo
+in modo più o meno complesso si definiscono e cercano le parole di
+interesse, nel secondo si definiscono le regole da usare per la 
+ricerca di qeuste parole.
+
 
 
 
@@ -278,9 +303,32 @@ class: middle
 
 
 
+???
 
+A questo punto però dobbiamo riuscire a fare in modo di ottenere il
+massimo delle informazioni possibili dal testo che stiamo analizzando
+e quindi solutamente uno dei passagi più importanti è quello del 
+pre processamento. 
 
+Possiamo raccogliere i metodi di preprocessamento in tre grandi
+categorie in base al loro effetto:
 
+- la rimoszione di informazioni che possono confondere, come parole 
+troppo comuni, o simboliche
+
+- l'unione di parole in un'unica forma, come per esempio diverse
+  declinazioni della stessa parola portate alla loro voce di
+  vocabolario, che da multiple entità distinte a livello informatico
+  divengono cosi una unica
+
+- o la creazione di costrutti chiamati n-gram che non sono altro che
+  sequenze contigue di n parole che vengono considerate a livello
+  informatico come fossero una parola sola, pensiamo per esempio alle
+  negazioni: se ogni parola fosse distinta e noi conoscessimo solo le
+  singole parole (ipotizzando di non poter cogliere la sintassi di una
+  frase) se non consideriamo una negazione come fosse una singola entità
+  non potremmo coglierne nessuna.
+  
 
 
 
@@ -298,7 +346,21 @@ class: middle
 
 
 
+???
 
+Bene, ora è necessario fare in modo di rappresentare le parole a livello
+informatico per poter utilizzarle in un programma, il metodo classico è
+quello di dare un indice a ogni parola e creare un dizionario di vettori
+lunghi ciascuno quanto sono le parole in cui compaiono solo zeri tranne
+nella cella corrispondente alla parola di interessa, che viene posta
+a 1.
+
+A questo punto possiamo rappresentare un documento con un vettore della
+stessa lunghezza semplicemente sommando tutti i vettori delle parole che
+lo compongono, ottenendo così una rappresentazione del documento con 
+un vettore lungo tanto quanto il dizionario e in cui in ogni posizione
+è riportata la frequenza con cui la parola corrispondente a quella
+posizione compare nel documento.
 
 
 
@@ -311,11 +373,30 @@ class: middle
 &lt;img src="images/download.png",  align = "center"&gt;
 
 
+???
+
+Ora basta posizionare tutti questi vettori orizzontalmente uno sotto
+l'altro per avere una rappresentazione matriciale a tabella di tutti
+i nostri documenti in cui in una data cella, che corrisponde a una parola
+in un docuemnto, è riportato quante volte tale parola compare in quel
+dato documeto. 
+
+Una volta ottenuta la raprpesentazione matriciale è poi possibile
+trasformare questi valori per pesarli in funzione di una qualche misura 
+di interesse che coinvolfa l'intera collezione.
 
 
 
+Questa procedura però come è facile immaginare ha il vantagigo di essere
+molto veloce e sempice da implementare ma ha due principali svantaggi:
 
+- il primo è che gran parte dello spazio utilizzato è vuoto, ovvero 
+composto da zeri. Abbiamo in fatti riservato a ogni docuemnto un vettore
+lungo tanto quanto il numero di tutte le possibili parole mentre solo una 
+piccolissima parte sarà stata utilizzata
 
+- e secondo non cogliamo la relazione tra le parole che risultano quindi 
+tutte completamente scorrelate una dall'altra
 
 
 
@@ -331,6 +412,18 @@ class: center, middle
 
 
 
+???
+
+Un modo completamente diverso e moderno invece si fonda sulla codifica
+delle parole in in vettori "densi" ovvero composti interamente da cifre
+non nulle, di dimensione molto minore della dimensione del vocabolario,
+solitamente parliamo di vettori lunghi 300 celle contro anche le decine
+di migliaia di celle o più della rtappresentazione one-hot.
+
+Querste codfiche vengono auto apprese da reti neurali (che vedremo fra 
+poco come funzionano) andando a modellare le parole in base al contesto
+in cui si trovano, ovvero sfruttanto grandi basi di dati come può essere
+per esempio tutto wikipedia nelle lingua di interesse.
 
 
 
@@ -349,7 +442,15 @@ class: center, middle
 
 
 
+???
 
+In questo modo ogni vettore rappresentante le coordinate di una parola
+nbello spazio del linguaggio considerato che a questo punto aquista
+delle proprietà lessico-geometriche arrivando a fenomeni che quello 
+rappresentato, in cui, per esempio, se matematicamente dal vettore
+rappresentatnre la parola re, togliamo il vettore rappresentante la
+parola uomo e aggiungiamo il vettore per la parola donna, otteniamo
+la parola regina.
 
 
 
@@ -379,7 +480,7 @@ Arthur Samuel (1959). **Machine Learning: Field of study that gives computers th
 
 ???
 
-bar
+
 
 
 

@@ -34,6 +34,7 @@ options(htmltools.dir.version = FALSE)
 <br>
 **Ph.D. course in:** Traslational Specialistic Medicine "G.B. Morgagni"<br>
 **Curriculum:** Biostatistics<br>
+**Supervisor:** Prof. Dario Gregori<br>
 <br>
 2020/03/17<br>
 <br>
@@ -47,7 +48,12 @@ University of Padova
 
 ???
 
-Buongiorno
+Buongiorno a tutti e grazie per essere qui per la discusisone della mia
+tesi di dottorato. Il tema trattato è quello dello sviluppo e dell'
+applicazione di tecniche di auto apprendimento per l'analisi e la 
+classificazione del testo in linguaggio naturale in ambito clinico.
+
+
 
 
 
@@ -72,9 +78,9 @@ class: inverse, middle
 
 1. **Motivation:** _How can Free-Text analysis improve (help) clinical research?_
 
-1. **Background 1:** _Machine Learning_
+1. **Background 1:** _Natural Language Processing and Text Mining_
 
-1. **Background 2:** _Natural Language Processing and Text Mining_
+1. **Background 2:** _Machine Learning_
 
 1. **Contributions:**
 
@@ -92,7 +98,21 @@ class: inverse, middle
 
 ???
 
-What we will talk about...
+Comincerò dando alcune motivazioni e considerazioni che mi hanno spinto
+e tuttora muovono i mie interessi in queste direzioni.
+
+Dopodiché farò due brevi introduzioni per mostrare e fissare gli
+strumenti che ho studiato e sfruttato nel corso di questi tre anni. 
+Questo sia nel caso delle tecninche di autoapprendimento che quelle 
+di analisi informatica del linguaggio naturale.
+
+Quindi presenterò i lavori a cui ho dato maggiore contributo coi miei
+studi su questi temi in questi tre anni insieme al nostro gruppo di
+lavoro all'unità di biostatistica Epidemiologia e sanità pubblica.
+
+Infine, vedremo quindi di ricapitolare in modo uniforme quanto fatto
+cercando di fornire una panoramica uniforme a posteriori.
+
 
 
 
@@ -115,6 +135,11 @@ What we will talk about...
 class: center, middle, inverse
 # Motivation
 
+???
+
+Iniziamo quindi con le motivazioni
+
+
 ---
 class: center
 background-image: url("images/clinical-texts.png")
@@ -124,28 +149,55 @@ background-size: contain
 .pull-left[
 ### Documents' content
 ]
-<!-- - Guidelines -->
-<!-- - Research papers -->
-<!-- - Trials' protocols -->
 
 .pull-right[
 ### Clinical records
 ]
-<!-- - Discharge notes -->
-<!-- - Clinical reports -->
-<!-- - Family doctors' diaries -->
 
 ### Social-Media
 
-<!-- - General illness -->
-<!-- - Adverse reactions -->
-<!-- - Drugs (ab)use -->
 
 
 
 ???
 
-bar
+La motivazione principale sta nell'aver osservato quanto il testo a 
+linguaggio naturale sia diffuso nella pratica clinica. Medici,
+infermieri, ricercatori e persino pazienti scambiano informnazioni
+cliniche principalmente utilizzando il testo a linguaggio naturale.
+
+Chiaramente ci sono tantissime misure rigorose e strutturate di
+interesse clinico, come possono essere quelle numeriche, come per
+esempio i livelli di emoglobina nel sangue o il peso, quelle categoriali,
+come per esempio il sesso, o la classe NYHA, e così via.
+
+Solo queste ultime però sono solitamente e riescono ad essere analizzate
+in modo programamtico e strutturato, appunto. Tutti quei dati clinici
+non strutturati come le immagini o il testo libero sono invece lasciate
+alla sola ed esclusiva analisi "esperta" degli esseri umani, questo per 
+la loro estrema complessità.
+
+Pensiamo infatti anche solo a tutti gli articoli di ricerca o alle linee
+guida, ai referti ospedalieri, i diari dei medici di base, alle note 
+cliniche, ma anche ai messaggi sui social network delle persone che
+esprimono disagi, possibili effetti avversi, usi e abusi di farmaci
+e così via.
+
+Il testo a linguaggio naturale, sopratutto e ancora, in ambito clinico
+è praticamente esclusiva prerogativa del singolo medico o operatore che
+lo legge.
+
+- Guidelines
+- Research papers
+- Trials' protocols
+
+- Discharge notes
+- Clinical reports
+- Family doctors' diaries
+
+- General illness
+- Adverse reactions
+- Drugs (ab)use
 
 
 
@@ -168,7 +220,262 @@ bar
 
 ---
 class: center, middle, inverse
+# Background 1: Natural Language processing and Text Mining
+
+???
+
+Vediamo quindi innanzitutto come può ed è possibile analizzare 
+il testo in linguaggio naturale per il recupero di informazioni non
+banali da esso.
+
+---
+class: center
+
+.pull-left[
+# Search string
+
+One or several strings (also called patterns) founded within a larger string or text.
+
+<img src="images/MeSH-example.svg.png", width = 70%,  align = "center">
+<small><small><small><small><small><small><small>
+<https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/MeSH-example.svg/1024px-MeSH-example.svg.png>
+</small></small></small></small></small></small></small>
+
+
+<img src="images/Boolean_operations_on_shapes_a.png", width = 40%,  align = "center">
+<img src="images/Boolean_operations_on_shapes_b.png", width = 40%,  align = "center">
+
+<small><small><small><small><small>
+<https://it.wikipedia.org/wiki/File:Boolean_operations_on_shapes.png>
+</small></small></small></small></small>
+]
+
+
+
+.pull-right[
+# Regular expressions
+
+A sequence of characters that define a search pattern
+
+<img src="images/crossword_regex.png",  align = "center">
+<br><br>
+<small><small><small>
+<https://www.flickr.com/photos/bluesmoon/8458343489/in/photostream/>
+</small></small></small>
+]
+
+???
+
+La prima e intuitiva forma di ricerca è quella della semplice ricerca
+delle parole nel testo. Questa pratica è stata in vari modi potenziata
+sfruttanto l'utilizzo di parole chiave in vocabolari gerarchici, il 
+cui più famoso forse in ambito medico sono la collezione dei termini 
+MeSH usati dall abiblioteca nazionale di medicina americana per 
+indicizzare tutti i lavori che colleziona.
+
+Da questo è poi possibile usare la logica di insieme per unire,
+intersecare, sottrarre e così via i risultati di singole ricerche.
+
+Dall'altra parte uno strumento potentissimo che è stato sviluppato per 
+il testo è il proto-linguaggio di programmazione delle espressioni
+regolari che non sono altro che delle regole con cui scrivere istruzioni
+per cercare il testo.
+
+La differenza tra i due approcci è fondamentalmente quindi che nel primo
+in modo più o meno complesso si definiscono e cercano le parole di
+interesse, nel secondo si definiscono le regole da usare per la 
+ricerca di qeuste parole.
+
+
+
+
+---
+class: middle
+
+# Preprocessing
+
+- **removing** (removes noise):
+  - remove non-word text
+  - remove stopwords
+  - strip whitespace
+
+- **merging** (reduces the risk to allow important information to become noise because they are dispersed):
+  - lowering
+  - stemming
+  - lemmatization
+
+- **producing** (from words to “tokens”, i.e. single indivisible piece of information to bring information which could be lost otherwise, e.g. negations):
+  - n-Grams (consecutive sequences of n words)
+
+
+
+???
+
+A questo punto però dobbiamo riuscire a fare in modo di ottenere il
+massimo delle informazioni possibili dal testo che stiamo analizzando
+e quindi solutamente uno dei passagi più importanti è quello del 
+pre processamento. 
+
+Possiamo raccogliere i metodi di preprocessamento in tre grandi
+categorie in base al loro effetto:
+
+- la rimoszione di informazioni che possono confondere, come parole 
+troppo comuni, o simboliche
+
+- l'unione di parole in un'unica forma, come per esempio diverse
+  declinazioni della stessa parola portate alla loro voce di
+  vocabolario, che da multiple entità distinte a livello informatico
+  divengono cosi una unica
+
+- o la creazione di costrutti chiamati n-gram che non sono altro che
+  sequenze contigue di n parole che vengono considerate a livello
+  informatico come fossero una parola sola, pensiamo per esempio alle
+  negazioni: se ogni parola fosse distinta e noi conoscessimo solo le
+  singole parole (ipotizzando di non poter cogliere la sintassi di una
+  frase) se non consideriamo una negazione come fosse una singola entità
+  non potremmo coglierne nessuna.
+  
+
+
+
+
+---
+class: middle
+
+# Sparse representation
+
+<img src="images/1_zFzLwr9kMiuT5FH9TPwd-Q.png", width = 80%  align = "center">
+
+<small><small><small>
+<https://towardsdatascience.com/word-embedding-with-word2vec-and-fasttext-a209c1d3e12c>
+</small></small></small>
+
+
+
+???
+
+Bene, ora è necessario fare in modo di rappresentare le parole a livello
+informatico per poter utilizzarle in un programma, il metodo classico è
+quello di dare un indice a ogni parola e creare un dizionario di vettori
+lunghi ciascuno quanto sono le parole in cui compaiono solo zeri tranne
+nella cella corrispondente alla parola di interessa, che viene posta
+a 1.
+
+A questo punto possiamo rappresentare un documento con un vettore della
+stessa lunghezza semplicemente sommando tutti i vettori delle parole che
+lo compongono, ottenendo così una rappresentazione del documento con 
+un vettore lungo tanto quanto il dizionario e in cui in ogni posizione
+è riportata la frequenza con cui la parola corrispondente a quella
+posizione compare nel documento.
+
+
+
+
+
+
+---
+class: middle
+
+<img src="images/download.png",  align = "center">
+
+
+???
+
+Ora basta posizionare tutti questi vettori orizzontalmente uno sotto
+l'altro per avere una rappresentazione matriciale a tabella di tutti
+i nostri documenti in cui in una data cella, che corrisponde a una parola
+in un docuemnto, è riportato quante volte tale parola compare in quel
+dato documeto. 
+
+Una volta ottenuta la raprpesentazione matriciale è poi possibile
+trasformare questi valori per pesarli in funzione di una qualche misura 
+di interesse che coinvolfa l'intera collezione.
+
+
+
+Questa procedura però come è facile immaginare ha il vantagigo di essere
+molto veloce e sempice da implementare ma ha due principali svantaggi:
+
+- il primo è che gran parte dello spazio utilizzato è vuoto, ovvero 
+composto da zeri. Abbiamo in fatti riservato a ogni docuemnto un vettore
+lungo tanto quanto il numero di tutte le possibili parole mentre solo una 
+piccolissima parte sarà stata utilizzata
+
+- e secondo non cogliamo la relazione tra le parole che risultano quindi 
+tutte completamente scorrelate una dall'altra
+
+
+
+---
+class: center, middle
+
+<img src="images/skip-gram.png", width = 70%, align = "center">
+
+<small><small><small><small>
+.right[<https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/>]
+</small></small></small>
+
+
+
+
+???
+
+Un modo completamente diverso e moderno invece si fonda sulla codifica
+delle parole in in vettori "densi" ovvero composti interamente da cifre
+non nulle, di dimensione molto minore della dimensione del vocabolario,
+solitamente parliamo di vettori lunghi 300 celle contro anche le decine
+di migliaia di celle o più della rtappresentazione one-hot.
+
+Querste codfiche vengono auto apprese da reti neurali (che vedremo fra 
+poco come funzionano) andando a modellare le parole in base al contesto
+in cui si trovano, ovvero sfruttanto grandi basi di dati come può essere
+per esempio tutto wikipedia nelle lingua di interesse.
+
+
+
+
+
+
+---
+class: center, middle
+
+<img src="images/fasttext-example.png", align = "center">
+
+<small><small><small><small>
+.right[<https://www.tensorflow.org/images/linear-relationships.png>]
+</small></small></small></small>
+
+
+
+
+???
+
+In questo modo ogni vettore rappresentante le coordinate di una parola
+nbello spazio del linguaggio considerato che a questo punto aquista
+delle proprietà lessico-geometriche arrivando a fenomeni che quello 
+rappresentato, in cui, per esempio, se matematicamente dal vettore
+rappresentatnre la parola re, togliamo il vettore rappresentante la
+parola uomo e aggiungiamo il vettore per la parola donna, otteniamo
+la parola regina.
+
+
+
+
+
+
+
+
+
+
+
+
+---
+class: center, middle, inverse
 # Background 1: Machine Learning
+
+???
+
+vediamo quindi innanzitutto come un programma 
 
 ---
 class: middle, center
@@ -179,7 +486,7 @@ Arthur Samuel (1959). **Machine Learning: Field of study that gives computers th
 
 ???
 
-bar
+
 
 
 
@@ -306,159 +613,6 @@ class: top
 <https://upload.wikimedia.org/wikipedia/commons/a/a3/Gradient_descent.gif>
 ]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-class: center, middle, inverse
-# Background 2: Natural Language processing and Text Mining
-
-
----
-class: center
-
-.pull-left[
-# Search string
-
-One or several strings (also called patterns) founded within a larger string or text.
-
-<img src="images/MeSH-example.svg.png", width = 70%,  align = "center">
-<small><small><small><small><small><small><small>
-<https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/MeSH-example.svg/1024px-MeSH-example.svg.png>
-</small></small></small></small></small></small></small>
-
-
-<img src="images/Boolean_operations_on_shapes_a.png", width = 40%,  align = "center">
-<img src="images/Boolean_operations_on_shapes_b.png", width = 40%,  align = "center">
-
-<small><small><small><small><small>
-<https://it.wikipedia.org/wiki/File:Boolean_operations_on_shapes.png>
-</small></small></small></small></small>
-]
-
-
-
-.pull-right[
-# Regular expressions
-
-A sequence of characters that define a search pattern
-
-<img src="images/crossword_regex.png",  align = "center">
-<br><br>
-<small><small><small>
-<https://www.flickr.com/photos/bluesmoon/8458343489/in/photostream/>
-</small></small></small>
-]
-
-???
-
-bar
-
-
-
----
-class: middle
-
-# Preprocessing
-
-- **removing** (removes noise):
-  - remove non-word text
-  - remove stopwords
-  - strip whitespace
-
-- **merging** (reduces the risk to allow important information to become noise because they are dispersed):
-  - lowering
-  - stemming
-  - lemmatization
-
-- **producing** (from words to “tokens”, i.e. single indivisible piece of information to bring information which could be lost otherwise, e.g. negations):
-  - n-Grams (consecutive sequences of n words)
-
-
-
-
-
-
-
-
-
-
----
-class: middle
-
-# Sparse representation
-
-<img src="images/1_zFzLwr9kMiuT5FH9TPwd-Q.png", width = 80%  align = "center">
-
-<small><small><small>
-<https://towardsdatascience.com/word-embedding-with-word2vec-and-fasttext-a209c1d3e12c>
-</small></small></small>
-
-
-
-
-
-
-
-
-
-
----
-class: middle
-
-<img src="images/download.png",  align = "center">
-
-
-
-
-
-
-
-
-
-
----
-class: center, middle
-
-<img src="images/skip-gram.png", width = 70%, align = "center">
-
-<small><small><small><small>
-.right[<https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/>]
-</small></small></small>
-
-
-
-
-
-
-
-
-
-
----
-class: center, middle
-
-<img src="images/fasttext-example.png", align = "center">
-
-<small><small><small><small>
-.right[<https://www.tensorflow.org/images/linear-relationships.png>]
-</small></small></small></small>
 
 
 
